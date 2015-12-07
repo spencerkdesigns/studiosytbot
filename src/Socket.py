@@ -2,13 +2,18 @@
 # Fairly generic
 #
 import socket
-from MainSettings import HOST, PORT, CHANNEL
-from OAuthSettings import OAUTH, NICK
+from Settings import HOST, PORT, PASS, IDENT, CHANNEL
 
 def openSocket():
-    sock = socket.socket()
-    sock.connect((HOST, PORT))
-    sock.send("PASS " + OAUTH + "\r\n") # PASSWORD
-    sock.send("NICK " + NICK + "\r\n") # USERNAME
-    sock.send("JOIN #" + CHANNEL + "\r\n") # USERNAME
-    return sock
+	
+	s = socket.socket()
+	s.connect((HOST, PORT))
+	s.send("PASS " + PASS + "\r\n")
+	s.send("NICK " + IDENT + "\r\n")
+	s.send("JOIN #" + CHANNEL + "\r\n")
+	return s
+	
+def sendMessage(s, message):
+	messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
+	s.send(messageTemp + "\r\n")
+	print("Sent: " + messageTemp)
