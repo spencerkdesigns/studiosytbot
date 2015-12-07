@@ -6,4 +6,4 @@
 from Socket import openSocket
 
 sock = openSocket()
-joinRoom(sock)
+#joinRoom(sock)
